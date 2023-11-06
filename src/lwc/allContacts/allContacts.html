@@ -1,0 +1,21 @@
+<!--
+ - Created by ASUS on 06.11.2023.
+ -->
+
+<!-- All Contacts -->
+<template>
+    <lightning-card title="Related Contacts" icon-name="standard:contact">
+        <lightning-button label="Create New Contact" onclick={createNewContact} slot="actions"></lightning-button>
+        <div class="slds-p-around_medium">
+            <template if:true={contactData} for:each={contactData} for:item="record">
+                <c-single-contact contact={record} key={record.Id}></c-single-contact>
+            </template>
+            <template if:true={contactError}>
+                <p class="slds-text-color_error">{contactError}</p>
+            </template>
+        </div>
+    </lightning-card>
+    <template if:true={isModalOpen}>
+        <c-new-contact account-id={recordId} onclosemodal={closeModal}></c-new-contact>
+    </template>
+</template>
